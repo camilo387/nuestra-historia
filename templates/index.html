@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Juan &amp; María José · Nuestra Historia</title>
+
+<!-- Tipografías: cursiva elegante para el libro, serif para títulos, sans limpia para UI -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Dancing+Script:wght@500;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <!-- Cursor personalizado -->
+  <div class="cursor-heart" id="cursorHeart">❤</div>
+
+  <!-- Fondo animado: canvas para partículas (corazones, destellos, estrellas, cupidos) -->
+  <canvas id="bgCanvas"></canvas>
+  <!-- Capa de pétalos cayendo (DOM, independiente del canvas) -->
+  <div class="petals-layer" id="petalsLayer" aria-hidden="true"></div>
+
+  <!-- Botón de música -->
+  <button class="music-toggle" id="musicToggle" aria-label="Reproducir música">
+    <span class="music-icon">♪</span>
+  </button>
+  <audio id="bgMusic" loop preload="none">
+    <!-- Coloca aquí el archivo de música romántica, por ejemplo: -->
+    <source src="/static/cancion.mp3" type="audio/mpeg">
+  </audio>
+
+  <!-- ======================= ESCENA 1: PORTADA / HERO ======================= -->
+  <section class="hero" id="heroScene">
+    <div class="hero-frame">
+      <p class="hero-eyebrow">✦ Un cuento hecho realidad ✦</p>
+      <h1 class="hero-title">
+        <span class="name">Juan</span>
+        <span class="heart-divider">❤</span>
+        <span class="name">María José</span>
+      </h1>
+      <p class="hero-subtitle">Nuestra Historia</p>
+
+      <button class="btn-read" id="btnRead">
+        <span class="btn-icon">📖</span>
+        <span class="btn-text">Leer nuestra historia</span>
+        <span class="btn-hearts" aria-hidden="true"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ======================= TRANSICIÓN CINEMATOGRÁFICA ======================= -->
+  <div class="cine-overlay" id="cineOverlay"></div>
+  <div class="cine-flash" id="cineFlash"></div>
+
+  <!-- ======================= ESCENA 2: EL LIBRO ======================= -->
+  <section class="book-scene" id="bookScene">
+
+    <div class="book-stage">
+
+      <!-- Controles de navegación -->
+      <button class="book-nav prev" id="prevBtn" aria-label="Página anterior">‹</button>
+      <button class="book-nav next" id="nextBtn" aria-label="Página siguiente">›</button>
+      <button class="book-close" id="closeBtn" aria-label="Cerrar libro">✕</button>
+
+      <div class="book" id="book">
+
+        <!-- TAPA -->
+        <div class="page cover" data-index="0">
+          <div class="page-front">
+            <div class="cover-ornament top">✦ ❦ ✦</div>
+            <h2 class="cover-title">Nuestra Historia</h2>
+            <p class="cover-names">Juan &amp; María José</p>
+            <div class="cover-ornament bottom">✦ ❦ ✦</div>
+            <p class="cover-hint">Toca para abrir</p>
+          </div>
+          <div class="page-back paper"></div>
+        </div>
+
+        <!-- PÁGINA 1 -->
+        <div class="page" data-index="1">
+          <div class="page-front paper">
+            <span class="page-number">1</span>
+            <h3 class="page-title">El instante en que todo comenzó</h3>
+            <div class="page-text" data-text="PAGE1"></div>
+          </div>
+          <div class="page-back paper"></div>
+        </div>
+
+        <!-- PÁGINA 2 -->
+        <div class="page" data-index="2">
+          <div class="page-front paper">
+            <span class="page-number">2</span>
+            <h3 class="page-title">Un deseo silencioso</h3>
+            <div class="page-text" data-text="PAGE2"></div>
+          </div>
+          <div class="page-back paper"></div>
+        </div>
+
+        <!-- PÁGINA 3 -->
+        <div class="page" data-index="3">
+          <div class="page-front paper">
+            <span class="page-number">3</span>
+            <h3 class="page-title">La amistad que nos encontró</h3>
+            <div class="page-text" data-text="PAGE3"></div>
+          </div>
+          <div class="page-back paper"></div>
+        </div>
+
+        <!-- PÁGINA 4 -->
+        <div class="page" data-index="4">
+          <div class="page-front paper">
+            <span class="page-number">4</span>
+            <h3 class="page-title">El miedo de perderte</h3>
+            <div class="page-text" data-text="PAGE4"></div>
+          </div>
+          <div class="page-back paper"></div>
+        </div>
+
+        <!-- PÁGINA 5 -->
+        <div class="page" data-index="5">
+          <div class="page-front paper">
+            <span class="page-number">5</span>
+            <h3 class="page-title">El día en que rompiste la distancia</h3>
+            <div class="page-text" data-text="PAGE5"></div>
+          </div>
+          <div class="page-back paper"></div>
+        </div>
+
+        <!-- PÁGINA 6 -->
+        <div class="page" data-index="6">
+          <div class="page-front paper">
+            <span class="page-number">6</span>
+            <h3 class="page-title">Dormida sobre mis piernas</h3>
+            <div class="page-text" data-text="PAGE6"></div>
+          </div>
+          <div class="page-back paper"></div>
+        </div>
+
+        <!-- PÁGINA 7 -->
+        <div class="page" data-index="7">
+          <div class="page-front paper">
+            <span class="page-number">7</span>
+            <h3 class="page-title">Cada día, un regalo</h3>
+            <div class="page-text" data-text="PAGE7"></div>
+          </div>
+          <div class="page-back paper"></div>
+        </div>
+
+        <!-- PÁGINA 8 -->
+        <div class="page" data-index="8">
+          <div class="page-front paper">
+            <span class="page-number">8</span>
+            <h3 class="page-title">Mi princesa Tiana</h3>
+            <div class="page-text" data-text="PAGE8"></div>
+          </div>
+          <div class="page-back paper"></div>
+        </div>
+
+        <!-- PÁGINA FINAL -->
+        <div class="page final-page" data-index="9">
+          <div class="page-front paper final">
+            <div class="te-amo-wrap">
+              <h2 class="te-amo" id="teAmo">TE AMO</h2>
+              <div class="final-hearts" aria-hidden="true"></div>
+              <figure class="final-photo" id="finalPhoto">
+                <div class="photo-frame">
+                  <!-- Reemplaza esta imagen por la foto de ustedes dos -->
+                  <img src="/static/foto.jpg" alt="Juan y María José" onerror="this.parentElement.classList.add('photo-missing')">
+                  <div class="photo-fallback">✦ Coloca aquí su foto ✦<br><small>foto.jpg</small></div>
+                </div>
+                <div class="photo-glow"></div>
+              </figure>
+              <p class="final-signature">Con todo mi corazón, hoy y siempre.</p>
+            </div>
+          </div>
+          <div class="page-back paper"></div>
+        </div>
+
+        <!-- CONTRATAPA -->
+        <div class="page back-cover" data-index="10">
+          <div class="page-front">
+            <div class="cover-ornament">✦ ❦ ✦</div>
+            <p class="cover-hint">Fin</p>
+          </div>
+          <div class="page-back paper"></div>
+        </div>
+
+      </div><!-- /.book -->
+    </div><!-- /.book-stage -->
+  </section>
+
+  <script src="/static/script.js"></script>
+</body>
+</html>
